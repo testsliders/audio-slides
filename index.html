@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>JS <3 Music - BrazilJS 16</title>
+    <meta name="description" content="Uma apresentação sobre a utilização de Web Audio API para criar Visualizações baseadas em música.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="img/folder-img.png">
+    <meta property="og:description" content="Uma apresentação sobre a utilização de Web Audio API para criar Visualizações baseadas em música.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <script src="js/vendor/reveal.min.js"></script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1 class="main-title">
+             
+            JS<span id="heart" onclick="heartBeat()" class="heart"></span>MUSIC
+          </h1>
+          <p class="main-links"><a href="http://willianjusten.com.br/">Willian Justen </a>/ <a href="https://twitter.com/Willian_justen">@willianjusten</a></p>
+        </section>
+        <section>
+          <section class="align-left">
+            <div>
+              <p>Às vezes eu escrevo...</p><a href="http://willianjusten.com.br">willianjusten.com.br</a>
+            </div>
+            <div class="fragment">
+              <hr>
+              <p>Às vezes eu faço código open source...</p><a href="http://github.com/willianjusten">github.com/willianjusten</a>
+            </div>
+            <div class="fragment">
+              <hr>
+              <p>E também faço cursos online!</p><a href="http://willianjusten.com.br/cursos">willianjusten.com.br/cursos</a>
+            </div>
+          </section>
+        </section>
+        <section>
+          <h4>Alguns lugares que já trabalhei...</h4><img src="img/jobs.png" alt="Jobs">
+        </section>
+        <section>
+          <h3>
+             
+            Como usar <span class="highlight-item">áudio </span>no meu site?
+          </h3>
+        </section>
+        <section data-background-video="videos/ugly-site.mp4" data-background-video-loop="true" class="case-video"><a href="http://www.angelfire.com/super/badwebs/" class="link-case">angelfire.com/super/badwebs</a></section>
+        <section>
+          <h3> <span class="highlight-item">Não </span>é bem isso...</h3>
+        </section>
+        <section>
+          <h3>A ideia é utilizar o audio<br>para criar <span class="highlight-item">experiências.</span></h3>
+        </section>
+        <section>
+          <h2 class="highlight-item">Visuais</h2>
+        </section>
+        <section data-background-video="videos/nice.mp4" data-background-video-loop="true" class="case-video"><a href="http://lhbzr.com" class="link-case">lhbzr.com</a></section>
+        <section>
+          <h2 class="highlight-item">Interativas</h2>
+        </section>
+        <section data-background-video="videos/trump.mp4" data-background-video-loop="true" class="case-video"><a href="http://trumpdonald.org/" class="link-case">trumpdonald.org</a></section>
+        <section>
+          <h2 class="highlight-item">Jogos</h2>
+        </section>
+        <section data-background-video="videos/hellorun.mp4" data-background-video-loop="true" class="case-video"><a href="http://www.hellorun.helloenjoy.com/" class="link-case">hellorun.helloenjoy.com</a></section>
+        <section>
+          <h2 class="highlight-item">Contar histórias</h2>
+        </section>
+        <section data-background-video="videos/starwars.mp4" data-background-video-loop="true" class="case-video"><a href="https://codepen.io/TimPietrusky/full/eHGfj/" class="link-case top">codepen.io/TimPietrusky/full/eHGfj</a></section>
+        <section data-background-image="img/awesome.gif"></section>
+        <section>
+          <h3>
+             
+            Colocando som na <span class="highlight-item">caixa!</span>
+          </h3>
+        </section>
+        <section>
+          <h3>Audio Tag</h3>
+          <audio src="musics/metallica.mp3" controls></audio><img src="img/audio-script.png" alt="">
+          <ul class="align-left">
+            <li>controls</li>
+            <li>preload</li>
+            <li>autoplay</li>
+            <li>loop</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Audio Tag Métodos</h3>
+          <audio id="myAudio" src="musics/metallica.mp3"></audio>
+          <audio id="horaShow" src="musics/hora-do-show.mp3"></audio><img src="img/audio-script-methods.png" alt="">
+          <button onclick="document.getElementById('myAudio').play()" class="btn-player">Play</button>
+          <button onclick="document.getElementById('myAudio').pause()" class="btn-player">Pause</button>
+          <button onclick="document.getElementById('myAudio').volume+=0.1" class="btn-player">Aumentar o Volume</button>
+          <button onclick="document.getElementById('myAudio').volume-=0.1" class="btn-player">Diminuir o Volume</button>
+          <p><img src="img/instant-button.png" alt="" onclick="document.getElementById('horaShow').play()"></p>
+        </section>
+        <section>
+          <h3 class="highlight-item">Limitações</h3>
+          <ul>
+            <li>Falta de controle preciso do tempo</li>
+            <li>Poucos sons podem tocar ao mesmo tempo</li>
+            <li>Não tem como fazer pre-buffer</li>
+            <li>Não tem como analisar os sons</li>
+            <li>Não tem como aplicar efeitos em real time</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Web Audio API</h2><img src="img/webaudioapi.png" alt="Web Audio API">
+        </section>
+        <section>
+          <h2>Web Audio API Nodes</h2>
+          <div class="col col-33 align-left move-left-minor">
+            <ul class="list-none">
+              <li class="main-item">Source</li>
+              <li>Media Element</li>
+              <li>Media Stream</li>
+              <li>Oscillator</li>
+              <li>Buffer</li>
+            </ul>
+          </div>
+          <div class="col col-33 align-left">
+            <ul class="list-none">
+              <li class="main-item">Utility</li>
+              <li>Script Proc.</li>
+              <li>Analyzer</li>
+              <li>Channel Splitter</li>
+              <li>Channel Merger</li>
+            </ul>
+          </div>
+          <div class="col col-20 align-left">
+            <ul class="list-none">
+              <li class="main-item">Effect</li>
+              <li>Gain</li>
+              <li>Biquad Filter</li>
+              <li>Delay</li>
+              <li>Convolver</li>
+              <li>Compressor</li>
+              <li>WaveShaper</li>
+            </ul>
+          </div>
+        </section>
+        <section>
+          <h2>Web Audio API Nodes</h2>
+          <div class="col col-33 align-left move-left-minor">
+            <ul class="list-none">
+              <li class="main-item">Source</li>
+              <li class="highlight-item">Media Element</li>
+              <li>Media Stream</li>
+              <li>Oscillator</li>
+              <li>Buffer</li>
+            </ul>
+          </div>
+          <div class="col col-33 align-left">
+            <ul class="list-none">
+              <li class="main-item">Utility</li>
+              <li class="highlight-item">Script Proc.</li>
+              <li class="highlight-item">Analyzer</li>
+              <li>Channel Splitter</li>
+              <li>Channel Merger</li>
+            </ul>
+          </div>
+          <div class="col col-20 align-left">
+            <ul class="list-none">
+              <li class="main-item">Effect</li>
+              <li>Gain</li>
+              <li>Biquad Filter</li>
+              <li>Delay</li>
+              <li>Convolver</li>
+              <li>Compressor</li>
+              <li>WaveShaper</li>
+            </ul>
+          </div>
+        </section>
+        <section>
+          <h2>"Hello World" AudioViz</h2>
+        </section>
+        <section>
+          <h2>Gráfico das conexões</h2><img src="img/source-analyser-destination.png" alt="Gráfico das conexões">
+        </section>
+        <section>
+          <h2>Criando o audio</h2>
+          <pre class="prettyprint"><code class="javascript">var audio = new Audio();
+audio.src = 'track.mp3';
+audio.loop = true;
+audio.autoplay = true;
+audio.crossOrigin = "anonymous";</code></pre>
+        </section>
+        <section>
+          <h3>Ligar o audio ao contexto</h3>
+          <pre class="prettyprint"><code class="javascript">audioContext = new window.AudioContext();
+source = audioContext.createMediaElementSource(audio);</code></pre>
+        </section>
+        <section>
+          <h3>Criando o analyser</h3>
+          <pre class="prettyprint"><code class="javascript">analyser = audioContext.createAnalyser();
+fbc_array = new Uint8Array(analyser.frequencyBinCount);</code></pre>
+        </section>
+        <section data-background-image="img/console-data.gif"></section>
+        <section>
+          <h4>Conectando o Analyser ao Destino</h4>
+          <pre class="prettyprint"><code class="javascript">source.connect(analyser);
+analyser.connect(audioContext.destination);</code></pre>
+        </section>
+        <section>
+          <h3>
+             
+            Mas e a parte da <span class="highlight-item">animação</span>?
+          </h3>
+        </section>
+        <section>
+          <h3>Criando a Animação</h3>
+          <pre class="prettyprint"><code class="javascript">function frameLooper() {
+    window.requestAnimationFrame(frameLooper);
+    analyser.getByteFrequencyData(fbc_array);
+    render();
+}</code></pre>
+        </section>
+        <section>
+          <h1>Exemplo</h1>
+          <p><a href="https://willianjusten.com.br/audio-experiments/bars/">Bars </a>/ <a href="https://willianjusten.com.br/audio-experiments/triangles/">Triangles</a></p>
+        </section>
+        <section>
+          <h3>Quer saber mais?</h3><img src="img/logo-aav.gif" alt="Awesome AudioViz Logo">
+          <p><a href="http://bit.ly/awesome-aav">bit.ly/awesome-aav</a></p>
+        </section>
+        <section>
+          <h3>Último Exemplo</h3>
+          <canvas id="meter"></canvas>
+          <p>
+            <button id="btnStart" class="btn-player align-center">Iniciar Captura</button>
+          </p>
+        </section>
+        <section>
+          <h1>Obrigado</h1><a href="https://willianjusten.com.br/braziljs-16" class="bigger-link">bit.ly/brjs-audio</a>
+        </section>
+      </div>
+    </div>
+    <script src="js/vendor/head.min.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/vendor/prettify/prettify.js"></script>
+  </body>
+</html>
